@@ -1,30 +1,51 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div class="container mx-auto mt-8">
+    <Flashcard
+      v-for="card in flashcards"
+      :key="card.id"
+      :card="card"
+      @rate="handleRating"
+    />
+    <div v-if="!showAllCards" class="mt-4">
+      <button @click="nextCard" class="bg-blue-500 text-white px-4 py-2 rounded">Next Card</button>
+    </div>
   </div>
-  <router-view />
 </template>
 
+<script>
+import Flashcard from './components/Flashcard.vue';
+
+export default {
+  components: {
+    Flashcard,
+  },
+  data() {
+    return {
+      flashcards: [
+        { id: 1, front: 'Front of Card 1', back: 'Back of Card 1' },
+        { id: 2, front: 'Front of Card 2', back: 'Back of Card 2' },
+        { id: 3, front: 'Front of Card 3', back: 'Back of Card 3' },
+        // Add more flashcards to this array
+      ],
+      currentIndex: 0,
+      showAllCards: false,
+    };
+  },
+  methods: {
+    handleRating(isCorrect) {
+      // Do something with the rating (e.g., update statistics)
+      console.log('Card rated:', isCorrect);
+    },
+    nextCard() {
+      this.currentIndex++;
+      if (this.currentIndex >= this.flashcards.length) {
+        this.showAllCards = true;
+      }
+    },
+  },
+};
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+/* Add any custom styles here if needed */
 </style>
