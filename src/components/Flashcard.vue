@@ -1,11 +1,11 @@
 <template>
-  <div class="bg-white p-4 shadow-md rounded-lg">
-    <div v-if="showFront" class="text-xl">{{ card.front }}</div>
-    <div v-else class="text-xl">{{ card.back }}</div>
-    <button @click="revealCard" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Reveal</button>
-    <div v-if="!showFront" class="mt-4">
-      <button @click="onRate(true)" class="bg-green-500 text-white px-4 py-2 rounded">Correct</button>
-      <button @click="onRate(false)" class="bg-red-500 text-white px-4 py-2 rounded">Wrong</button>
+  <div class="paper">
+    <div v-if="showFront" >{{ card.front }}</div>
+    <div v-else >{{ card.back }}</div>
+    <button @click="revealCard" >Reveal</button>
+    <div v-if="!showFront" >
+      <button @click="onRate(true)" >Correct</button>
+      <button @click="onRate(false)" >Wrong</button>
     </div>
   </div>
 </template>
