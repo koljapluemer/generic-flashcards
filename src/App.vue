@@ -5,8 +5,9 @@
       :key="card.id"
       :card="card"
       @rate="handleRating"
+      v-show="currentIndex === card.id - 1"
     />
-    <div v-if="!showAllCards" class="mt-4">
+    <div class="mt-4">
       <button @click="nextCard" class="bg-blue-500 text-white px-4 py-2 rounded">Next Card</button>
     </div>
   </div>
@@ -28,7 +29,6 @@ export default {
         // Add more flashcards to this array
       ],
       currentIndex: 0,
-      showAllCards: false,
     };
   },
   methods: {
