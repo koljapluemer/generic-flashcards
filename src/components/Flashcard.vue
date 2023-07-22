@@ -1,11 +1,14 @@
 <template>
-  <div class="paper">
-    <div v-if="showFront" >{{ card.front }}</div>
-    <div v-else >{{ card.back }}</div>
-    <button @click="revealCard" >Reveal</button>
-    <div v-if="!showFront" >
-      <button @click="onRate(true)" >Correct</button>
-      <button @click="onRate(false)" >Wrong</button>
+  <div class="">
+    <div class="paper">
+      <div v-if="showFront">{{ card.front }}</div>
+      <div v-else>{{ card.back }}</div>
+    </div>
+
+    <div class="flex p2 gap justify-center items-center">
+      <button v-if="showFront" @click="revealCard">Reveal</button>
+      <button v-if="!showFront" @click="onRate(false)">Wrong</button>
+      <button v-if="!showFront" @click="onRate(true)">Correct</button>
     </div>
   </div>
 </template>
@@ -28,12 +31,8 @@ export default {
       this.showFront = !this.showFront;
     },
     onRate(isCorrect) {
-      this.$emit('rate', isCorrect);
+      this.$emit("rate", isCorrect);
     },
   },
 };
 </script>
-
-<style>
-/* Add any custom styles here if needed */
-</style>

@@ -5,18 +5,12 @@
       :key="card.id"
       :card="card"
       @rate="handleRating"
+      :ref="'flashcard-' + card.id"
       v-show="currentIndex === card.id - 1"
     />
-    <div >
-      <button
-        @click="nextCard"
-        
-      >
-        Next Card
-      </button>
-    </div>
   </div>
 </template>
+
 
 <script>
 import Flashcard from "./components/Flashcard.vue";
@@ -95,6 +89,7 @@ export default {
     handleRating(isCorrect) {
       // Do something with the rating (e.g., update statistics)
       console.log("Card rated:", isCorrect);
+      this.nextCard();
     },
     nextCard() {
       // pick a random index that isnt the current 
