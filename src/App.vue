@@ -1,12 +1,12 @@
 <template>
   <div class="p4">
-    <div class="">
+    <div class="" v-if="card">
       <div class="paper">
         <div v-if="!isRevealed">{{ card.front }}</div>
         <div v-else>{{ card.back }}</div>
 
-        current date: {{ new Date() }} <br>
-        due date: {{ card.dueAt }} <br>
+        current date: {{ new Date().toUTCString() }} <br />
+        due date: {{ card.dueAt }} <br />
         <!-- due date is in the past: {{ new Date(card.dueAt) <= new Date() }} <br> -->
       </div>
 
@@ -16,6 +16,8 @@
         <button v-if="isRevealed" @click="calculateRapidSR(1)">Correct</button>
       </div>
     </div>
+
+    <span v-else>all done.</span>
 
     <!-- list all flashcards with all info for debugging -->
     <summary>
@@ -56,6 +58,38 @@ const initialFlashcards = [
     repetitions: [],
     interval: 1,
   },
+  {
+    id: 44,
+    front: "Sierra Leone",
+    back: "Freetown",
+    dueAt: null,
+    repetitions: [],
+    interval: 1,
+  },
+  {
+    id: 45,
+    front: "Somalia",
+    back: "Mogadishu",
+    dueAt: null,
+    repetitions: [],
+    interval: 1,
+  },
+  {
+    id: 46,
+    front: "South Africa",
+    back: "Pretoria (administrative) / Cape Town (legislative) / Bloemfontein (judicial)",
+    dueAt: null,
+    repetitions: [],
+    interval: 1,
+  },
+  {
+    id: 47,
+    front: "South Sudan",
+    back: "Juba",
+    dueAt: null,
+    repetitions: [],
+    interval: 1,
+  },
 ];
 
 // Load flashcards from localStorage if available
@@ -75,15 +109,18 @@ const flashcards = reactive(
 const dueFlashcards = computed(() => {
   console.log("computed due flashcards");
   // Filter out flashcards that are due for review
-  const currentDate = new Date();
+  const currentDate = new Date().toUTCString();
   console.log("currentDate", currentDate);
   return flashcards.filter(
-    (card) => (card.dueAt && new Date(card.dueAt) <= currentDate) || !card.dueAt
+    (card) => (card.dueAt && card.dueAt <= currentDate) || !card.dueAt
   );
 });
 
-
 const card = computed(() => {
+  // Check if due flashcards are available
+  if (dueFlashcards.value.length === 0) {
+    return null;
+  }
   // Return the current flashcard
   return dueFlashcards.value[currentIndex.value];
 });
@@ -91,7 +128,7 @@ const card = computed(() => {
 function calculateRapidSR(grade) {
   // Save answer in repetitions, with a timestamp including seconds
   const answer = {
-    timestamp: new Date(),
+    timestamp: new Date().toUTCString(),
     answer: grade,
   };
 
@@ -101,15 +138,12 @@ function calculateRapidSR(grade) {
     grade === 0
       ? Math.max(flashcards[currentIndex.value].interval / 2, 1)
       : flashcards[currentIndex.value].interval * 2;
+  console.log("interval", interval);
   // Add seconds to dueAt
   const dueAt = new Date();
   dueAt.setSeconds(dueAt.getSeconds() + interval);
   flashcards[currentIndex.value].interval = interval;
-  // Update dueAt using a new reactive object to trigger reactivity
-  flashcards[currentIndex.value] = {
-    ...flashcards[currentIndex.value],
-    dueAt: dueAt,
-  };
+  flashcards[currentIndex.value].dueAt = dueAt.toUTCString();
   // Save the flashcards to localStorage
   localStorage.setItem("flashcards", JSON.stringify(flashcards));
   nextCard();
@@ -137,7 +171,7 @@ function nextCard() {
   if (dueFlashcards.value.length === 0) {
     console.log("No due flashcards available");
     return;
-  } 
+  }
   console.log("due", dueFlashcards.value);
   // Pick a random index from the dueFlashcards array
   currentIndex.value = Math.floor(Math.random() * dueFlashcards.value.length);
