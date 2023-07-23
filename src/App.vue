@@ -5,9 +5,8 @@
         <div v-if="!isRevealed">{{ card.front }}</div>
         <div v-else>{{ card.back }}</div>
 
-        current date: {{ new Date().toUTCString() }} <br />
+        current date: {{ Date.now() }} <br />
         due date: {{ card.dueAt }} <br />
-        <!-- due date is in the past: {{ new Date(card.dueAt) <= new Date() }} <br> -->
       </div>
 
       <div class="flex p2 gap justify-center items-center">
@@ -24,8 +23,8 @@
       <details>
         <ul>
           <li v-for="card in flashcards" :key="card.id">
-            {{ card.front }} - {{ card.back }} - {{ card.interval }} -
-            {{ card.dueAt }} - {{ card.repetitions.length }}
+            {{ card.front }} - {{ card.back }} - {{ card.interval }} - due:
+            {{ card.dueAt }} - repeated: {{ card.repetitions.length }}
           </li>
         </ul>
         <!-- download button -->
@@ -109,7 +108,7 @@ const flashcards = reactive(
 const dueFlashcards = computed(() => {
   console.log("computed due flashcards");
   // Filter out flashcards that are due for review
-  const currentDate = new Date().toUTCString();
+  const currentDate = Date.now();
   console.log("currentDate", currentDate);
   return flashcards.filter(
     (card) => (card.dueAt && card.dueAt <= currentDate) || !card.dueAt
@@ -128,7 +127,7 @@ const card = computed(() => {
 function calculateRapidSR(grade) {
   // Save answer in repetitions, with a timestamp including seconds
   const answer = {
-    timestamp: new Date().toUTCString(),
+    timestamp: Date.now(),
     answer: grade,
   };
 
@@ -140,10 +139,13 @@ function calculateRapidSR(grade) {
       : flashcards[currentIndex.value].interval * 2;
   console.log("interval", interval);
   // Add seconds to dueAt
-  const dueAt = new Date();
-  dueAt.setSeconds(dueAt.getSeconds() + interval);
+  const dueAt = Date.now() + interval * 1000;
   flashcards[currentIndex.value].interval = interval;
-  flashcards[currentIndex.value].dueAt = dueAt.toUTCString();
+  flashcards[currentIndex.value].dueAt = dueAt;
+  console.log(
+    "check if we set the fucking dueAt value?",
+    flashcards[currentIndex.value].dueAt
+  );
   // Save the flashcards to localStorage
   localStorage.setItem("flashcards", JSON.stringify(flashcards));
   nextCard();
