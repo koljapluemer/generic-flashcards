@@ -50,6 +50,8 @@ export default {
       // If no saved flashcards, use the initialFlashcards list as is
       this.flashcards = this.initialFlashcards;
     }
+
+    this.nextCard();
   },
   computed: {
     initialFlashcards() {
