@@ -19,8 +19,7 @@
         <ul>
           <li v-for="card in flashcards" :key="card.id">
             {{ card.front }} - {{ card.back }} - {{ card.interval }} -
-            {{ card.repetitions }} - {{ card.easinessFactor }} -
-            {{ card.dueAt }}
+            {{ card.dueAt }} - {{ card.repetitions.length }}
           </li>
         </ul>
         <!-- download button -->
@@ -67,301 +66,123 @@ export default {
       // Add your initial list of flashcards here
       return [
         {
-          id: 1,
-          front: "Algeria",
-          back: "Algiers",
+          id: 42,
+          front: "Senegal",
+          back: "Dakar",
           dueAt: null,
           repetitions: [],
+          interval: 1,
         },
         {
-          id: 2,
-          front: "Angola",
-          back: "Luanda",
+          id: 43,
+          front: "Seychelles",
+          back: "Victoria",
           dueAt: null,
           repetitions: [],
+          interval: 1,
         },
         {
-          id: 3,
-          front: "Benin",
-          back: "Porto-Novo",
+          id: 44,
+          front: "Sierra Leone",
+          back: "Freetown",
           dueAt: null,
           repetitions: [],
+          interval: 1,
         },
         {
-          id: 4,
-          front: "Botswana",
-          back: "Gaborone",
+          id: 45,
+          front: "Somalia",
+          back: "Mogadishu",
           dueAt: null,
           repetitions: [],
+          interval: 1,
         },
         {
-          id: 5,
-          front: "Burkina Faso",
-          back: "Ouagadougou",
+          id: 46,
+          front: "South Africa",
+          back: "Pretoria (administrative) / Cape Town (legislative) / Bloemfontein (judicial)",
           dueAt: null,
           repetitions: [],
+          interval: 1,
         },
         {
-          id: 6,
-          front: "Burundi",
-          back: "Bujumbura",
+          id: 47,
+          front: "South Sudan",
+          back: "Juba",
           dueAt: null,
           repetitions: [],
+          interval: 1,
         },
         {
-          id: 7,
-          front: "Cabo Verde",
-          back: "Praia",
+          id: 48,
+          front: "Sudan",
+          back: "Khartoum",
           dueAt: null,
           repetitions: [],
+          interval: 1,
         },
         {
-          id: 8,
-          front: "Cameroon",
-          back: "Yaoundé",
+          id: 49,
+          front: "Tanzania",
+          back: "Dodoma (political) / Dar es Salaam (commercial)",
           dueAt: null,
           repetitions: [],
+          interval: 1,
         },
         {
-          id: 9,
-          front: "Central African Republic",
-          back: "Bangui",
+          id: 50,
+          front: "Togo",
+          back: "Lomé",
           dueAt: null,
           repetitions: [],
+          interval: 1,
         },
         {
-          id: 10,
-          front: "Chad",
-          back: "N'Djamena",
+          id: 51,
+          front: "Tunisia",
+          back: "Tunis",
           dueAt: null,
           repetitions: [],
+          interval: 1,
         },
         {
-          id: 11,
-          front: "Comoros",
-          back: "Moroni",
+          id: 52,
+          front: "Uganda",
+          back: "Kampala",
           dueAt: null,
           repetitions: [],
+          interval: 1,
         },
         {
-          id: 12,
-          front: "Democratic Republic of the Congo",
-          back: "Kinshasa",
+          id: 53,
+          front: "Zambia",
+          back: "Lusaka",
           dueAt: null,
           repetitions: [],
+          interval: 1,
         },
         {
-          id: 13,
-          front: "Republic of the Congo",
-          back: "Brazzaville",
+          id: 54,
+          front: "Zimbabwe",
+          back: "Harare",
           dueAt: null,
           repetitions: [],
-        },
-        {
-          id: 14,
-          front: "Djibouti",
-          back: "Djibouti",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 15,
-          front: "Egypt",
-          back: "Cairo",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 16,
-          front: "Equatorial Guinea",
-          back: "Malabo",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 17,
-          front: "Eritrea",
-          back: "Asmara",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 18,
-          front: "Eswatini",
-          back: "Mbabane (administrative) / Lobamba (legislative, royal)",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 19,
-          front: "Ethiopia",
-          back: "Addis Ababa",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 20,
-          front: "Gabon",
-          back: "Libreville",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 21,
-          front: "Gambia",
-          back: "Banjul",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 22,
-          front: "Ghana",
-          back: "Accra",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 23,
-          front: "Guinea",
-          back: "Conakry",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 24,
-          front: "Guinea-Bissau",
-          back: "Bissau",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 25,
-          front: "Ivory Coast (Côte d'Ivoire)",
-          back: "Yamoussoukro (political) / Abidjan (economic)",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 26,
-          front: "Kenya",
-          back: "Nairobi",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 27,
-          front: "Lesotho",
-          back: "Maseru",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 28,
-          front: "Liberia",
-          back: "Monrovia",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 29,
-          front: "Libya",
-          back: "Tripoli",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 30,
-          front: "Madagascar",
-          back: "Antananarivo",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 31,
-          front: "Malawi",
-          back: "Lilongwe",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 32,
-          front: "Mali",
-          back: "Bamako",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 33,
-          front: "Mauritania",
-          back: "Nouakchott",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 34,
-          front: "Mauritius",
-          back: "Port Louis",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 35,
-          front: "Morocco",
-          back: "Rabat",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 36,
-          front: "Mozambique",
-          back: "Maputo",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 37,
-          front: "Namibia",
-          back: "Windhoek",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 38,
-          front: "Niger",
-          back: "Niamey",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 39,
-          front: "Nigeria",
-          back: "Abuja",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 40,
-          front: "Rwanda",
-          back: "Kigali",
-          dueAt: null,
-          repetitions: [],
-        },
-        {
-          id: 41,
-          front: "São Tomé and Príncipe",
-          back: "São Tomé",
-          dueAt: null,
-          repetitions: [],
+          interval: 1,
         },
       ];
     },
     dueFlashcards() {
       // Filter out flashcards that are due for review
-      const currentDate = new Date();
-      return this.flashcards.filter(
+      const currentDate = new Date()
+      const dueCards =this.flashcards.filter(
         (card) =>
           (card.dueAt && new Date(card.dueAt) <= currentDate) || !card.dueAt
       );
+      console.log(`found ${dueCards.length} due cards`);
+    },
+    dueFlashcardsWithoutNew() {
+      // filter flashcards that have no repetitions
+      return this.dueFlashcards.filter((card) => card.repetitions.length > 0);
     },
     card() {
       // Return the current flashcard
@@ -372,15 +193,22 @@ export default {
     calculateRapidSR(grade) {
       // save answer in repetitons, with timestamp including seconds
       const answer = {
-        timestamp: new Date(),
+        timestamp: new Date().toISOString(),
         answer: grade,
       };
 
       this.flashcards[this.currentIndex].repetitions.push(answer);
-      // randomly set the due date to 1-100 seconds from now
-      const seconds = Math.floor(Math.random() * 100) + 1;
-      const dueAt = new Date(Date.now() + seconds * 1000).toISOString();
-      this.flashcards[this.currentIndex].dueAt = dueAt;
+      // if grade is 0, half interval (min: 1), else multiply with 2
+      const interval =
+        grade === 0
+          ? Math.max(this.flashcards[this.currentIndex].interval / 2, 1)
+          : this.flashcards[this.currentIndex].interval * 2;
+      // add seconds to dueAt
+      const dueAt = new Date();
+      dueAt.setSeconds(dueAt.getSeconds() + interval);
+      this.flashcards[this.currentIndex].interval = interval;
+      // TODO: vue "reactiveness" apparently doesn't fucking extend to array contents?!?!
+      this.flashcards[this.currentIndex].dueAt = dueAt.toISOString();
       // save the flashcards to localStorage
       localStorage.setItem("flashcards", JSON.stringify(this.flashcards));
       this.nextCard();
@@ -392,7 +220,10 @@ export default {
         encodeURIComponent(JSON.stringify(this.flashcards));
       const downloadAnchorNode = document.createElement("a");
       downloadAnchorNode.setAttribute("href", dataStr);
-      downloadAnchorNode.setAttribute("download", "flashcards.json");
+      downloadAnchorNode.setAttribute(
+        "download",
+        `flashcard_data_${Date.now().toISOString}.json`
+      );
       document.body.appendChild(downloadAnchorNode); // required for firefox
       downloadAnchorNode.click();
       downloadAnchorNode.remove();
