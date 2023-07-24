@@ -140,12 +140,13 @@ function calculateRapidSR(grade) {
   console.log("interval", interval);
   // Add seconds to dueAt
   const dueAt = Date.now() + interval * 1000;
-  flashcards[currentIndex.value].interval = interval;
-  flashcards[currentIndex.value].dueAt = dueAt;
+  card.value.interval = interval;
+  card.value.dueAt = dueAt;
   console.log(
     "check if we set the fucking dueAt value?",
     flashcards[currentIndex.value].dueAt
   );
+  // TODO: for no reason, the wrong object is edited. Nice. No matter whether I use card or the indirect flashcards[] call. Holy shit.
   // Save the flashcards to localStorage
   localStorage.setItem("flashcards", JSON.stringify(flashcards));
   nextCard();
