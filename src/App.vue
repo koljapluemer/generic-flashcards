@@ -1,21 +1,6 @@
 <template>
   <div class="p4">
-    <div class="" v-if="card">
-      <div class="paper">
-        <div v-if="!isRevealed">{{ card.front }}</div>
-        <div v-else>{{ card.back }}</div>
-
-        current date: {{ Date.now() }} <br />
-        due date: {{ card.dueAt }} <br />
-      </div>
-
-      <div class="flex p2 gap justify-center items-center">
-        <button v-if="!isRevealed" @click="isRevealed = true">Reveal</button>
-        <button v-if="isRevealed" @click="calculateRapidSR(0)">Wrong</button>
-        <button v-if="isRevealed" @click="calculateRapidSR(1)">Correct</button>
-      </div>
-    </div>
-
+    <Flashcard v-if="card" :card="card" @rate="calculateRapidSR" />
     <span v-else>all done.</span>
 
     <!-- list all flashcards with all info for debugging -->
@@ -36,6 +21,7 @@
 
 <script setup>
 import { ref, reactive, computed, onMounted } from "vue";
+import Flashcard from "./components/Flashcard.vue";
 
 const currentIndex = ref(0);
 const isRevealed = ref(false);
